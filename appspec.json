@@ -1,0 +1,183 @@
+{
+  "settings": [
+    {
+      "id": "username",
+      "name": "Movebank Username",
+      "description": "Your Movebank username.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "password",
+      "name": "Movebank Password",
+      "description": "Your Movebank password.",
+      "defaultValue": null,
+      "type": "SECRET"
+    },
+    {
+      "id": "study_access",
+      "name": "Download Studies by Access Level",
+      "description": "Download all studies where you are collaborator, data manager, or both.",
+      "defaultValue": "both",
+      "type": "RADIOBUTTONS",
+      "options": [
+        {
+          "value": "collaborator",
+          "displayText": "Collaborator"
+        },
+        {
+          "value": "data_manager",
+          "displayText": "Data manager"
+        },
+        {
+          "value": "both",
+          "displayText": "Both"
+        }
+      ]
+    },
+    {
+      "id": "select_sensors",
+      "name": "Select Sensors",
+      "description": "Sensor type(s) to download, comma seperated. See https://github.com/movebank/movebank-api-doc/blob/master/movebank-api.md#get-a-list-of-sensor-types for possible types. Example: 653, 82798.",
+      "defaultValue": null,
+      "type": "STRING"
+    },
+    {
+      "id": "incl_outliers",
+      "name": "Include Outliers",
+      "description": "Tick to include outliers",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "minarg",
+      "name": "Use Minimal Arguments",
+      "description": "Download minimal dataset: timestamp, track_id and the location. The track attributes will be fully included. ",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "thin",
+      "name": "Thin Data",
+      "description": "Apply thinning",
+      "defaultValue": false,
+      "type": "CHECKBOX"
+    },
+    {
+      "id": "thin_numb",
+      "name": "Thinning Interval Value",
+      "description": "Numeric value for thinning interval.",
+      "defaultValue": 6,
+      "type": "INTEGER"
+    },
+    {
+      "id": "thin_unit",
+      "name": "Thinning Interval Unit",
+      "description": "Unit for thinning interval",
+      "defaultValue": "hours",
+      "type": "RADIOBUTTONS",
+      "options": [
+        {
+          "value": "minutes",
+          "displayText": "Minutes"
+        },
+        {
+          "value": "hours",
+          "displayText": "Hours"
+        },
+        {
+          "value": "days",
+          "displayText": "Days"
+        }
+      ]
+    },
+    {
+      "id": "timestamp_start",
+      "name": "Start Timestamp",
+      "description": "Start date-time",
+      "defaultValue": null,
+      "type": "INSTANT"
+    },
+    {
+      "id": "timestamp_end",
+      "name": "End Timestamp",
+      "description": "End date-time",
+      "defaultValue": null,
+      "type": "INSTANT"
+    },
+    {
+      "id": "lastXdays",
+      "name": "Last X Days",
+      "description": "Download only the last X days of data.",
+      "defaultValue": null,
+      "type": "INTEGER"
+    }
+  ],
+  "dependencies": {
+    "R": [
+      {
+        "name": "lubridate"
+      },
+      {
+        "name": "move2"
+      },
+	  {
+        "name": "sf"
+      },
+	  {
+        "name": "keyring"
+      },
+	  {
+        "name": "dplyr"
+      },
+	  {
+        "name": "xml2"
+      },
+      {
+        "name": "purrr"
+      },
+      {
+        "name": "vctrs"
+      },
+      {
+        "name": "rlang"
+      }
+    ]
+  },
+  "license": {
+    "key": "MIT"
+  },
+  "language": "eng",
+   "keywords": [
+    "movebank",
+    "download",
+    "datasource",
+	"thinning"
+  ],
+  "people": [
+  {
+      "firstName": "Camilo",
+	  "middleInitials": null,
+      "lastName": "Carneiro",
+      "email": "camilofcarneiro@gmail.com",
+      "roles": [
+		"author", "creator",
+        "contributor",
+        "reviewer"
+      ],
+      "orcid": "0000-0002-9803-2144",
+      "affiliation": "South Iceland Research Centre",
+	  "affiliationRor": ""
+    }
+  ],
+  "reference": [
+	{
+    "type": "IsDescribedBy",
+    "note": "Global Wader",
+    "url": "https://www.globalwader.org"
+    }
+  ],
+  "documentation": {
+    "url": "https://github.com/CamiloCarneiro/Movebank-Location-Data-Multiple-Studies/blob/master/README.md"
+  }
+}

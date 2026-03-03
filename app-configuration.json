@@ -1,0 +1,15 @@
+{
+  "username": "secret",
+  "password": "secret",
+  "select_sensors": "82798",
+  "incl_outliers": false,
+  "minarg": false,
+  "thin": false,
+  "thin_numb": 1,
+  "thin_unit": "hours",
+  "timestamp_start": "",
+  "timestamp_end": "",
+  "config_version": 0,
+  "lastXdays": 5,
+  "study_access": "both"
+}
