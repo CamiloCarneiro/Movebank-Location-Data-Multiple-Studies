@@ -32,7 +32,7 @@ rFunction = function(data=NULL,
   
   
   # retry loop: attempts Movebank access for up to 30 minutes
-  while(Sys.time() < (time0+1800) & !(exists("locs")))
+  while(Sys.time() < (time0+1800) & !exists("locs", inherits = FALSE))
   {
     # sleep logic: backoff delays depending on elapsed time
     if (Sys.time()>time0+2 & Sys.time()<=time0+600) Sys.sleep(60) # after 2 seconds only try every 1 minute
@@ -59,8 +59,6 @@ rFunction = function(data=NULL,
               studies$study_permission == "collaborator" |
                 studies$study_permission == "data_manager",
             ]
-          } else {
-            stop("study_access must be one of: NULL, 'collaborator', 'data_manager', 'both'")
           }
           
           # if no studies match, exit early
@@ -85,27 +83,25 @@ rFunction = function(data=NULL,
         # ---- Sensor selection
         if (is.null(select_sensors))
         {
-          logger.info("The selected study does not contain any location sensor data. No data will be downloaded (NULL output) by this App.")
-          result <- NULL
+          logger.info("No sensors specified; all location sensors downloaded.")
+          all_locations_sensors <-  movebank_retrieve(entity_type="tag_type") %>%
+            filter(is_location_sensor == TRUE) %>% pull(id)
+          
+          arguments[["sensor_type_id"]] <- all_locations_sensors
           
         } else {
           # convert comma-separated string into numeric vector
           if (is.character(select_sensors)) {
-            # split on comma
-            select_sensors <- trimws(unlist(strsplit(select_sensors, ",")))
-            select_sensors <- as.numeric(select_sensors)
+            select_sensors_vec <- as.integer(unlist(strsplit(select_sensors, ",")))
+          arguments[["sensor_type_id"]] <- select_sensors_vec
           }
           
-          # Validate
-          if (any(is.na(select_sensors))) {
-            stop("select_sensors must be comma-separated numeric IDs, e.g. '653,82798'.")
-          }
           
-          arguments[["sensor_type_id"]] <- select_sensors
+          
           
           # retrieve sensor metadata and log selected sensor names
           sensorInfo <- movebank_retrieve(entity_type = "tag_type")
-          select_sensors_name <- sensorInfo$name[which(as.numeric(sensorInfo$id) %in% select_sensors)]
+          select_sensors_name <- sensorInfo$name[which(as.numeric(sensorInfo$id) %in% arguments[["sensor_type_id"]])]
           logger.info(paste(
             "You have selected to download locations of these selected sensor types:",
             paste(select_sensors_name, collapse = ", ")
