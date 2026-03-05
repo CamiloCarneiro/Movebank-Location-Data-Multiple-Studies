@@ -17,7 +17,7 @@
     {
       "id": "study_access",
       "name": "Download Studies by Access Level",
-      "description": "Download all studies where you are collaborator, data manager, or both.",
+      "description": "Download all studies where you are collaborator, data manager, both, or all studies that you can download data from.",
       "defaultValue": "both",
       "type": "RADIOBUTTONS",
       "options": [
@@ -32,13 +32,17 @@
         {
           "value": "both",
           "displayText": "Both"
+        },
+        {
+          "value": "download",
+          "displayText": "All download access"
         }
       ]
     },
     {
       "id": "select_sensors",
       "name": "Select Sensors",
-      "description": "Sensor type(s) to download, comma seperated. See https://github.com/movebank/movebank-api-doc/blob/master/movebank-api.md#get-a-list-of-sensor-types for possible types. Example: 653, 82798.",
+      "description": "Sensor type(s) to download, comma seperated. See https://github.com/movebank/movebank-api-doc/blob/master/movebank-api.md#get-a-list-of-sensor-types for possible types. Example: 653, 82798. If left blank, all location sensors will be included.",
       "defaultValue": null,
       "type": "STRING"
     },
@@ -52,7 +56,7 @@
     {
       "id": "minarg",
       "name": "Use Minimal Arguments",
-      "description": "Download minimal dataset: timestamp, track_id and the location. The track attributes will be fully included. ",
+      "description": "Download minimal dataset: timestamp, track_id and the location. The track attributes will be fully included.",
       "defaultValue": false,
       "type": "CHECKBOX"
     },

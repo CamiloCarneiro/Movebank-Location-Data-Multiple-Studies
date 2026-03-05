@@ -59,6 +59,10 @@ rFunction = function(data=NULL,
               studies$study_permission == "collaborator" |
                 studies$study_permission == "data_manager",
             ]
+          } else if (study_access == "download") {
+            allowed <- studies[
+              studies$i_have_download_access == TRUE,
+            ]
           }
           
           # if no studies match, exit early
